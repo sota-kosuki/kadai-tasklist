@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   end
   
   def new
-    @task = Task.new(content: "タスク: 期限： ")
+    @task = Task.new
   end
   
   def create
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
       flash[:success] = "タスクが正常に更新されました"
       redirect_to @task
     else
-      flash.now[danger] = "タスクが更新できませんでした"
+      flash.now[:danger] = "タスクが更新できませんでした"
       render :edit
     end
   end
@@ -51,6 +51,6 @@ class TasksController < ApplicationController
   
   #Strong Parameter
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content, :status)
   end
 end
